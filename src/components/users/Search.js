@@ -1,45 +1,40 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 
-class Search extends Component {
-  state = {
-    text: "",
-  };
+const Search = ({ showAlert, searchUser }) => {
+  const [text, setText] = useState("");
 
-  onSubmit = (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
-    if (!this.state.text) {
-      this.props.showAlert({ msg: "Please enter something", type: "light" });
+    if (!text) {
+      showAlert({ msg: "Please enter something", type: "light" });
       return;
     }
-    this.props.searchUser(this.state.text);
-    this.setState({ text: "" });
+    searchUser(text);
+    setText("");
   };
 
-  onChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
+  const onChange = (e) => {
+    setText(e.target.value);
   };
 
-  render() {
-    const { text } = this.state;
-    return (
-      <div>
-        <form onSubmit={this.onSubmit}>
-          <input
-            type="text"
-            name="text"
-            placeholder="Search User..."
-            value={text}
-            onChange={this.onChange}
-          />
-          <input
-            type="submit"
-            value="Search"
-            className="btn btn-dark btn-block"
-          />
-        </form>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <form onSubmit={onSubmit}>
+        <input
+          type="text"
+          name="text"
+          placeholder="Search User..."
+          value={text}
+          onChange={onChange}
+        />
+        <input
+          type="submit"
+          value="Search"
+          className="btn btn-dark btn-block"
+        />
+      </form>
+    </div>
+  );
+};
 
 export default Search;
