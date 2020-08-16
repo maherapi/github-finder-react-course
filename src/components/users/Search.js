@@ -1,6 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import GithubContext from "../../context/github/githubContext";
+import AlertContext from "../../context/alert/alertContext";
 
-const Search = ({ showAlert, searchUser }) => {
+const Search = () => {
+  const githubContext = useContext(GithubContext);
+  const { searchUser } = githubContext;
+  const alertContext = useContext(AlertContext);
+  const { showAlert } = alertContext;
+  
   const [text, setText] = useState("");
 
   const onSubmit = (e) => {
