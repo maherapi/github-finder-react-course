@@ -9,6 +9,7 @@ const User = ({ getSingleUser, getUserRepos, user, repos, loading, match }) => {
   useEffect(() => {
     getSingleUser(login);
     getUserRepos(login);
+    // eslint-disable-next-line
   }, []);
 
   if (loading) return <Spinner />;
